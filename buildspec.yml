@@ -5,16 +5,15 @@ phases:
     runtime-versions:
       php: 8.1
     commands:
-      - echo "Install dependencies"
-      - composer install --no-dev
+      - echo "Installing dependencies..."
+      - composer install --no-dev --optimize-autoloader
   build:
     commands:
-      - echo "Build complete - ready to deploy"
+      - echo "Build completed"
   post_build:
     commands:
-      - echo "Deploying to EC2..."
-      - |
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ec2-key.pem" ./ ubuntu@16.176.181.115:/var/www/html
+      - echo "Deploying to EC2"
+      - rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ec2-key.pem" ./ ec2-user@<EC2-IP>:/var/www/html
 artifacts:
   files:
     - '**/*'
