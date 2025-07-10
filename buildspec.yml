@@ -14,7 +14,7 @@ phases:
     commands:
       - echo "Deploying to EC2..."
       - |
-        rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ec2-key.pem" ./ ec2-user@<EC2-IP>:/var/www/html
+        rsync -avz -e "ssh -o StrictHostKeyChecking=no -i ec2-key.pem" ./ ubuntu@16.176.181.115:/var/www/html
 artifacts:
   files:
     - '**/*'
